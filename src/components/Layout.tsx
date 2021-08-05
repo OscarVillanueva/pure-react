@@ -1,6 +1,6 @@
-import React from 'react'
+import { FC } from 'react'
 
-const Layout = ({ children }) => {
+const Layout: FC = ({ children }) => {
   return ( 
     <main>
       { children }
@@ -8,4 +8,4 @@ const Layout = ({ children }) => {
   );
 }
  
-export default Layout;
+export default Layout
