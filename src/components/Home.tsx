@@ -1,8 +1,8 @@
-import React from 'react'
-import Layout from './Layout';
+import React, { FC } from 'react'
+import Layout from './Layout'
 import Navigation from './Navigation'
 
-const Home = () => {
+const Home: FC = () => {
   return ( 
     <Layout>
       <h1>Hola desde Home</h1>
