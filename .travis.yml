@@ -1,6 +1,4 @@
 language: node_js
 node_js: 12
-jobs:
-  include:
-    script:
-    - npm run build
+script:
+  - npm run build
