@@ -5,7 +5,7 @@ import Navigation from './Navigation'
 const Home: FC = () => {
   return ( 
     <Layout>
-      <h1>Hola desde Home</h1>
+      <h1>Hola desde Home!</h1>
       
       <h2>Otra cosa</h2>
 
