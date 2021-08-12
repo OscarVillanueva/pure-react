@@ -22,6 +22,19 @@ module.exports = {
             presets: ['@babel/preset-react']
           }
         }
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
+        include: path.resolve(__dirname, 'src'),
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          // Compiles Sass to CSS
+          'postcss-loader',
+          'sass-loader',
+        ],
       }
     ]
   },
