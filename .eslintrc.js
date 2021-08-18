@@ -14,6 +14,7 @@ module.exports = {
 	},
 	plugins: ['react', '@typescript-eslint', 'prettier'],
 	rules: {
+		"no-use-before-define": ["error", { "variables": false }],
 		'prettier/prettier': [
 			'error',
 			{

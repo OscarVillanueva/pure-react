@@ -4,7 +4,7 @@ module.exports = {
   entry: path.resolve( __dirname, "src/index.tsx" ),
   output: {
     filename: "app.js",
-    publicPath: "public/",
+    publicPath: "/",
     path: path.resolve( __dirname, "dist" )
   },
   mode: "development",
@@ -40,6 +40,7 @@ module.exports = {
   },
   devServer: {
     inline: false,
-    publicPath: "/dist/"
+    publicPath: "/dist/",
+    historyApiFallback: true,
   }
 }
