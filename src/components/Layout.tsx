@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 const Layout: FC = ({ children }) => {
   return ( 
-    <main>
+    <main className = "container mx-auto">
       { children }
     </main>
   );

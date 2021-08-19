@@ -15,20 +15,24 @@ const RedditList: FC = () => {
   
   const [ subreddits ] = useState(['frontend', 'reactjs', 'vuejs'])
 
-  useEffect(() => {
-    if (subreddit)
-      console.log(`subreddit`, subreddit.machine.context.subreddit)
-  }, [subreddit]) 
-
   return ( 
 
     <Layout>
 
       <header>
 
-        <p>{current.value}</p>
+        <h1
+          className = "text-center text-4xl uppercase font-bold mt-10"
+        >
+          Reddit posts
+        </h1>
+
+        <p className = "badge block mb-4">
+          Reddit Machine State: {current.value}
+        </p>
 
         <select
+          className = "select select-bordered w-full max-w-xs"
           value = { subreddit ? subreddit.machine.context.subreddit : "a" }
           onChange={(e) => {
             send('SELECT', { name: e.target.value });
@@ -42,7 +46,14 @@ const RedditList: FC = () => {
 
       </header>
         
-      { current.matches('idle') && <h1>Select a subreddit</h1> }
+      { current.matches('idle') && ( 
+
+        <h1 className = "text-center mt-10 font-bold text-2xl">
+          Select a subreddit
+        </h1> 
+
+      )}
+      
       { subreddit && (
         <SubReddit 
           service = { subreddit } 
