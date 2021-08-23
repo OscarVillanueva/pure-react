@@ -2,10 +2,10 @@ import React, { FC, useState, useEffect } from 'react'
 import { useMachine } from '@xstate/react';
 
 // Context
-import PaymentFormMachine from '../context/PaymentFormMachine'
+import PaymentFormMachine from 'context/PaymentFormMachine'
 
 // Components
-import Layout from './Layout'
+import Layout from 'components/Layout'
 
 
 const Home: FC = () => {

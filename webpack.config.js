@@ -9,7 +9,13 @@ module.exports = {
   },
   mode: "development",
   resolve: {
-    extensions: ['', '.js', '.jsx', '.ts', '.tsx']
+    extensions: ['', '.js', '.jsx', '.ts', '.tsx'],
+    alias: {
+      components: path.resolve(__dirname, 'src/components'),
+      context: path.resolve(__dirname, 'src/context'),
+      pages: path.resolve(__dirname, 'src/pages'),
+      styles: path.resolve(__dirname, 'src/styles'),
+    }
   },
   module: {
     rules: [

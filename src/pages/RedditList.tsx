@@ -2,11 +2,11 @@ import React, { FC, useState, useEffect } from 'react'
 import { useMachine } from '@xstate/react';
 
 // context
-import RedditMachine from '../context/RedditMachine'
+import RedditMachine from 'context/RedditMachine'
 
 // components
-import Layout from './Layout'
-import SubReddit from './SubReddit'
+import Layout from 'components/Layout'
+import SubReddit from 'components/SubReddit'
 
 const RedditList: FC = () => {
 

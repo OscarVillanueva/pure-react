@@ -1,14 +1,14 @@
 import React from 'react';
 
 // Styles
-import './styles/styles.css';
+import 'styles/styles.css';
 
 // Router
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Components
-import Home from './components/Home';
-import RedditList from './components/RedditList'
+import Home from 'pages/Home';
+import RedditList from 'pages/RedditList'
 
 const App = () => {
   return (
