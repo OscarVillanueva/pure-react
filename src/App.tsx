@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Components
 import Home from 'pages/Home';
 import RedditList from 'pages/RedditList'
+import Counter from 'pages/Counter';
 
 const App = () => {
   return (
@@ -23,6 +24,11 @@ const App = () => {
           exact
           path = "/reddit"
           component = { RedditList }
+        />
+        <Route
+          exact
+          path = "/counter"
+          component = { Counter }
         />
       </Switch>
     </Router>
