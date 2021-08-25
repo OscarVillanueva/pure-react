@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Home from 'pages/Home';
 import RedditList from 'pages/RedditList'
 import Counter from 'pages/Counter';
-import TodoList from 'pages/TodoList';
+import Todo from 'pages/Todo';
 
 const App = () => {
   return (
@@ -34,7 +34,7 @@ const App = () => {
         <Route
           exact
           path = "/todolist"
-          component = { TodoList }
+          component = { Todo }
         />
       </Switch>
     </Router>

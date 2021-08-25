@@ -6,7 +6,8 @@ type TodoListEvents =
 
 type TodoListContext = {
   tasks: string[],
-  task: string
+  task: string,
+  msg: string
 }
 
 const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
@@ -15,15 +16,31 @@ const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
     initial: 'idle',
     context: {
       tasks: [],
-      task: ""
+      task: '',
+      msg: ''
     },
     states: {
       idle: {},
       changed: {
         on: {
-          SAVE: {
-            target: 'idle',
-            actions: ['onSave']
+          SAVE: [
+            {
+              target: 'idle',
+              cond: 'validForm',
+              actions: ['onSave']
+            },
+            {
+              target: 'error'
+            }
+          ]
+        }
+      },
+      error: {
+        invoke: {
+          id: 'doRemoveMessage',
+          src: () => removeMessage(),
+          onDone: {
+            target: 'idle'
           }
         }
       }
@@ -45,8 +62,29 @@ const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
           task: ""
         }
       })
+    },
+    guards: {
+      validForm: (context, event) => {
+        
+        if (context.task.trim() === ''){
+          context.msg = "Task name is required"
+          return false
+        }
+
+        return true
+      }
     }
   }
 )
+
+const removeMessage = (): Promise<any> => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+
+      resolve("")
+
+    }, 2000)
+  })
+}
 
 export default TodoListMachine
