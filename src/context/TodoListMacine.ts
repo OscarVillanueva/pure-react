@@ -1,11 +1,19 @@
 import { createMachine, assign} from 'xstate'
+import shortid from 'shortid';
 
 type TodoListEvents = 
   | { type: 'INPUT', data: string }
+  | { type: 'TOGGLE', data: string }
   | { type: 'SAVE' }
 
+export type Todo = {
+  id: string,
+  name: string,
+  completed: boolean
+}
+
 type TodoListContext = {
-  tasks: string[],
+  tasks: Todo[],
   task: string,
   msg: string
 }
@@ -49,20 +57,60 @@ const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
       INPUT: {
         target: '.changed',
         actions: ['onChange']
+      },
+      TOGGLE: {
+        target: '.idle',
+        actions: ['toggleTask']
       }
     }
   },
   {
     actions: {
       onChange: assign({ task: (context, event) => event.type === 'INPUT' ? event.data : "" }),
+
+      toggleTask: assign((context, event) => {
+
+        if (event.type !== 'TOGGLE') return context
+
+        console.log("entre")
+
+        const { tasks } = context
+
+        const newTasks : Todo[] = tasks.map((task: Todo) => {
+          
+          if ( task.id === event.data ) {
+            return {
+              ...task,
+              completed: !task.completed
+            }
+          }
+
+          return task
+
+        })
+
+        return {
+          ...context,
+          tasks: newTasks
+        }
+      }),
+
       onSave: assign((context, event) => {
         return {
           ...context,
-          tasks: [ ...context.tasks, context.task ],
+          tasks: [ 
+            ...context.tasks, 
+            {
+              id: shortid.generate(), 
+              name: context.task, 
+              completed: false
+            }
+          ],
           task: ""
         }
       })
     },
+
     guards: {
       validForm: (context, event) => {
         

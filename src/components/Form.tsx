@@ -27,7 +27,7 @@ const Form: FC<FormProps> = ({ machine, send }) => {
 
   return ( 
     <form 
-      className = "p-10 card bg-base-200 w-2/5 mx-auto"
+      className = "p-10 card bg-base-300 w-2/5 mx-auto"
       onSubmit = { handleSubmit }
     >
 

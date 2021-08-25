@@ -1,16 +1,33 @@
 import React, { FC } from 'react'
+import { Todo } from 'context/TodoListMacine';
+import Task from 'components/Task'
 
 export interface TodoListProps {
-  tasks: string[]
+  tasks: Todo[]
+  send: any
 }
  
-const TodoList: FC<TodoListProps> = ({ tasks }) => {
+const TodoList: FC<TodoListProps> = ({ tasks, send }) => {
+
   return ( 
 
     <div className="container mx-auto">
-      {tasks.map(task => (
-        <li>{task}</li>
-      ))}
+
+      { tasks.length > 0 && (
+        <h2>Todos: </h2>
+      )}
+
+      <ul>
+        {tasks.map((task: Todo) => (
+          
+          <Task
+            key = { task.id }
+            task = { task }
+            send = { send }
+          />
+
+        ))}
+      </ul>
     </div>
 
   );

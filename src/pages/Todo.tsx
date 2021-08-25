@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react'
-import { useMachine } from '@xstate/react';
+import { useActor, useMachine } from '@xstate/react';
 
 // Machines
 import TodoListMachine from 'context/TodoListMacine'
@@ -9,12 +9,6 @@ import TodoList from 'components/TodoList';
 const Todo: FC = () => {
 
   const [machine, send] = useMachine(TodoListMachine)
-
-  useEffect(() => {
-    
-    console.log(`machine.value`, machine.value)
-
-  }, [machine])
 
   return ( 
     <div>
@@ -27,6 +21,7 @@ const Todo: FC = () => {
 
       <TodoList
         tasks = { machine.context.tasks }
+        send = { send }
       />
 
     </div>
