@@ -4,6 +4,7 @@ import shortid from 'shortid';
 type TodoListEvents = 
   | { type: 'INPUT', data: string }
   | { type: 'TOGGLE', data: string }
+  | { type: 'DELETE', data: string }
   | { type: 'SAVE' }
 
 export type Todo = {
@@ -61,6 +62,10 @@ const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
       TOGGLE: {
         target: '.idle',
         actions: ['toggleTask']
+      },
+      DELETE: {
+        target: '.idle',
+        actions: ['onDelete']
       }
     }
   },
@@ -72,22 +77,28 @@ const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
 
         if (event.type !== 'TOGGLE') return context
 
-        console.log("entre")
-
         const { tasks } = context
 
-        const newTasks : Todo[] = tasks.map((task: Todo) => {
-          
-          if ( task.id === event.data ) {
-            return {
-              ...task,
-              completed: !task.completed
-            }
+        let i = 0;
+        let flag = true
+        let newTasks: Todo[] = [...tasks]
+        
+        while (flag) {
+
+          if (newTasks[i].id === event.data){
+            const newTask : Todo = newTasks[i]
+            newTask.completed = !newTask.completed
+            newTasks.splice(i, 1)
+
+            if (newTask.completed) newTasks.push(newTask)
+            else newTasks.unshift(newTask)
+
+            flag = false
           }
 
-          return task
+          i = i + 1;
 
-        })
+        }
 
         return {
           ...context,
@@ -99,15 +110,26 @@ const TodoListMachine = createMachine<TodoListContext, TodoListEvents>(
         return {
           ...context,
           tasks: [ 
-            ...context.tasks, 
             {
               id: shortid.generate(), 
               name: context.task, 
               completed: false
-            }
+            },
+            ...context.tasks, 
           ],
           task: ""
         }
+      }),
+
+      onDelete: assign((context, event) => {
+
+        if (event.type !== 'DELETE') return context
+
+        return {
+          ...context,
+          tasks: context.tasks.filter((task: Todo) => task.id !== event.data),
+        }
+
       })
     },
 

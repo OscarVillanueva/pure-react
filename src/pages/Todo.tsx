@@ -12,8 +12,6 @@ const Todo: FC = () => {
 
   return ( 
     <div>
-      <h1>Todo List</h1>
-
       <Form 
         machine = { machine }
         send = { send }
